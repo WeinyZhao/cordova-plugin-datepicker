@@ -121,24 +121,30 @@
 
 #pragma mark - Actions
 - (IBAction)doneAction:(id)sender {
-  [self jsDateSelected];
+  [self jsDateSelected:true];
   [self hide];
 }
   
 - (IBAction)cancelAction:(id)sender {
+  [self jsDateSelected:false];
   [self hide];
 }
 
 
 - (void)dateChangedAction:(id)sender {
-  [self jsDateSelected];
+  [self jsDateSelected:true];
 }
 
 #pragma mark - JS API
 
-- (void)jsDateSelected {
+- (void)jsDateSelected:(BOOL) isSelected{
   NSTimeInterval seconds = [self.datePicker.date timeIntervalSince1970];
-  NSString* jsCallback = [NSString stringWithFormat:@"datePicker._dateSelected(\"%f\");", seconds];
+  NSString* jsCallback;
+  if(isSelected){
+   jsCallback = [NSString stringWithFormat:@"datePicker._dateSelected(\"%f\");", seconds];
+  }else{
+   jsCallback = @"datePicker._dateSelected(\"0\");"
+  }
   //NSLog(jsCallback);
   [super writeJavascript:jsCallback];
 }
