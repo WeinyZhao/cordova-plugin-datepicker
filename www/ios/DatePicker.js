@@ -86,6 +86,10 @@ DatePicker.prototype.show = function(options, cb) {
 };
 
 DatePicker.prototype._dateSelected = function(date) {
+    if(date==0){
+      //cancel button has pressed.
+      if(this._callback){this._callback(null)}
+    }
     var d = new Date(parseFloat(date) * 1000);
     if (this._callback)
         this._callback(d);
