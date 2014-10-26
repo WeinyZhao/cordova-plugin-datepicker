@@ -143,7 +143,7 @@
   if(isSelected){
    jsCallback = [NSString stringWithFormat:@"datePicker._dateSelected(\"%f\");", seconds];
   }else{
-   jsCallback = @"datePicker._dateSelected(\"0\");"
+   jsCallback = @"datePicker._dateSelected(\"0\");";
   }
   //NSLog(jsCallback);
   [super writeJavascript:jsCallback];
